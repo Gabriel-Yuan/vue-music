@@ -1,13 +1,38 @@
 <template>
-    <transition name="slide">
-      <div class="singer-detail"></div>
-    </transition>
+  <transition name="slide">
+    <div class="singer-detail"></div>
+  </transition>
 </template>
 
 <script>
-    export default {
-        name: "singer-detail"
+  import {mapGetters} from 'vuex'
+  import {getSingerDetail} from "../../api/singer";
+  import {ERR_OK} from "../../api/config";
+
+  export default {
+    name: "singer-detail",
+    computed:{
+      ...mapGetters([
+        'singer'
+      ])
+    },
+    created(){
+      this._getDetail()
+    },
+    methods:{
+      _getDetail(){
+        if(!this.singer.id){
+          this.$router.push('/singer');
+          return;
+        }
+        getSingerDetail(this.singer.id).then((res)=>{
+          if(res.code===ERR_OK){
+            console.log(res.data)
+          }
+        })
+      }
     }
+  }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
