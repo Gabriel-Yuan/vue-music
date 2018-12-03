@@ -13,6 +13,6 @@ export function getSingerList() {
     hostUin: 0,
     needNewCode: 0,
     platform: 'yqq',
-  })
+  });
   return jsonp(url, data, options);
 }
