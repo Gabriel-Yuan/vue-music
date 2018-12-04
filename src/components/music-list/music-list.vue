@@ -21,7 +21,7 @@
             class="list"
             ref="list">
       <div class="song-list-wrapper">
-        <song-list :songs="songs"></song-list>
+        <song-list @select="selectItem" :songs="songs"></song-list>
       </div>
       <div class="loading-container" v-show="!songs.length">
         <loading></loading>
@@ -35,6 +35,7 @@
   import SongList from "@/base/song-list/song-list";
   import {prefixStyle} from "@/common/js/dom";
   import Loading from "@/base/loading/loading";
+  import {mapActions} from 'vuex'
 
   const transform = prefixStyle('transform');
   const backdrop = prefixStyle('backdrop-filter');
@@ -82,7 +83,16 @@
       },
       back() {
         this.$router.back()
-      }
+      },
+      selectItem(item,index){
+        this.selectPlay({
+          list:this.songs,
+          index
+        })
+      },
+      ...mapActions([
+        'selectPlay'
+      ])
     },
     watch: {
       scrollY(newY) {
@@ -121,7 +131,6 @@
 <style scoped lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/variable.styl"
   @import "../../common/stylus/mixin.styl"
-  @import "../../common/stylus/index.styl"
 
   .music-list
     position: fixed
@@ -131,20 +140,16 @@
     bottom: 0
     right: 0
     background: $color-background
-
-
     .back
       position absolute
       top: 0
       left: 6px
       z-index: 50
-
       .icon-back
         display: block
         padding: 10px
         font-size: $font-size-large-x
         color: $color-theme
-
     .title
       position: absolute
       top: 0
@@ -156,7 +161,6 @@
       line-height: 40px
       font-size: $font-size-large
       color: $color-text
-
     .bg-image
       position: relative
       width: 100%
@@ -164,13 +168,11 @@
       padding-top: 70%
       transform-origin: top
       background-size: cover
-
       .play-wrapper
         position: absolute
         bottom: 20px
         z-index: 50
         width: 100%
-
         .play
           box-sizing: border-box
           width: 135px
@@ -181,18 +183,15 @@
           color: $color-theme
           border-radius: 100px
           font-size: 0
-
           .icon-play
             display: inline-block
             vertical-align: middle
             margin-right: 6px
             font-size: $font-size-medium-x
-
           .text
             display: inline-block
             vertical-align: middle
             font-size: $font-size-small
-
       .filter
         position: absolute
         top: 0
@@ -200,22 +199,18 @@
         width: 100%
         height: 100%
         background: rgba(7, 17, 27, 0.4)
-
     .bg-layer
       position: relative
       height: 100%
       background: $color-background
-
     .list
       position: fixed
       top: 0
       bottom: 0
       width: 100%
       background: $color-background
-
       .song-list-wrapper
         padding: 20px 30px
-
       .loading-container
         position: absolute
         width: 100%

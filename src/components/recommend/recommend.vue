@@ -104,6 +104,7 @@
           display: flex
           box-sizing: border-box
           align-items: center
+          padding: 0 20px 20px 20px
           .icon
             flex: 0 0 60px
             width: 60px

@@ -178,12 +178,8 @@
     height: 100%
     overflow: hidden
     background: $color-background
-
     .list-group
       padding-bottom: 30px
-      list-style: none
-      margin-left: -40px
-
       .list-group-title
         height: 30px
         line-height: 30px
@@ -191,27 +187,22 @@
         font-size: $font-size-small
         color: $color-text-l
         background: $color-highlight-background
-
       .list-group-item
         display: flex
-        margin-left: -50px
         align-items: center
         padding: 20px 0 0 30px
-
         .avatar
           width: 50px
           height: 50px
           border-radius: 50%
-
         .name
           margin-left: 20px
           color: $color-text-l
           font-size: $font-size-medium
-
     .list-shortcut
       position: absolute
       z-index: 30
-      right 0
+      right: 0
       top: 50%
       transform: translateY(-50%)
       width: 20px
@@ -220,24 +211,18 @@
       text-align: center
       background: $color-background-d
       font-family: Helvetica
-
       .item
         padding: 3px
         line-height: 1
-        margin-left -60px
-        list-style: none
         color: $color-text-l
         font-size: $font-size-small
-
         &.current
           color: $color-theme
-
     .list-fixed
       position: absolute
       top: 0
       left: 0
       width: 100%
-
       .fixed-title
         height: 30px
         line-height: 30px
@@ -245,11 +230,9 @@
         font-size: $font-size-small
         color: $color-text-l
         background: $color-highlight-background
-
     .loading-container
       position: absolute
       width: 100%
       top: 50%
       transform: translateY(-50%)
 </style>
-

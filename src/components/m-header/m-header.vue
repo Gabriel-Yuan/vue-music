@@ -15,7 +15,6 @@
   @import "../../common/stylus/variable.styl"
   @import "../../common/stylus/mixin.styl"
 
-
   .m-header
     position: relative
     height: 44px
@@ -34,6 +33,7 @@
     .text
       display: inline-block
       vertical-align: top
+      line-height: 44px
       font-size: $font-size-large
     .mine
       position: absolute
