@@ -108,7 +108,6 @@
         } else {
           blur = Math.min(20 * percent, 20);
         }
-        this.$refs.filter.style['filter'] = `blur(${blur}px)`;
         this.$refs.filter.style[backdrop] = `blur(${blur}px)`;
         if (newY < this.minTransalteY) {
           zIndex = 10;
