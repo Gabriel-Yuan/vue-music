@@ -39,10 +39,12 @@
   import Slider from "@/base/slider/slider";
   import Scroll from "../../base/scroll/scroll";
   import Loading from "../../base/loading/loading";
+  import {playlistMixin} from "@/common/js/mixin";
 
   export default {
     name: "recommend",
     components: {Loading, Scroll, Slider},
+    mixins:[playlistMixin],
     data(){
       return{
         recommends:[],
@@ -54,6 +56,11 @@
       this._getDiscList();
     },
     methods:{
+      handlePlayList(playlist) {
+        const bottom = playlist.length > 0 ? '60px' : '';
+        this.$refs.recommend.style.bottom = bottom;
+        this.$refs.scroll.refresh();
+      },
       _getDiscList(){
         getDiscList().then((res)=>{
           if(res.code===ERR_OK){
