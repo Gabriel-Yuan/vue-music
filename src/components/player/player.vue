@@ -116,6 +116,7 @@
   import Lyric from 'lyric-parser'
   import Scroll from "@/base/scroll/scroll";
 
+
   const transform = prefixStyle('transform');
   const transitionDuration = prefixStyle('transitionDuration');
 
@@ -130,11 +131,11 @@
         currentLyric: null,
         currentLineNum: 0,
         currentShow: 'cd',
-        playingLyric: ''
+        playingLyric: '',
       }
     },
     created() {
-      this.touch = {}
+      this.touch = {};
     },
     computed: {
       cdCls() {

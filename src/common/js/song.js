@@ -4,7 +4,7 @@ import {ERR_OK} from "@/api/config";
 import {Base64} from 'js-base64'
 
 export default class Song {
-  constructor({id, mid, singer, name, album, duration, image, url}) {
+  constructor({id, mid, singer, name, album, duration, image, url,vkey}) {
     this.id = id;
     this.mid = mid;
     this.singer = singer;
@@ -13,6 +13,7 @@ export default class Song {
     this.duration = duration;
     this.image = image;
     this.url = url;
+    this.vkey=vkey;
   }
 
   getLyric() {
@@ -35,13 +36,14 @@ export default class Song {
 export function createSong(musicData, vkey) {
   return new Song({
     id: musicData.songid,
-    mid: musicData.songmid,
+    mid:musicData.songmid ,
     singer: filterSinger(musicData.singer),
     name: musicData.songname,
     album: musicData.albumname,
     duration: musicData.interval,
+    vkey:vkey,
     image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.albummid}.jpg?max_age=2592000`,
-    url: `http://dl.stream.qqmusic.qq.com/C400${musicData.songmid}.m4a?fromtag=38&guid=5931742855&vkey=${vkey}`
+    url: `http://dl.stream.qqmusic.qq.com/C400${musicData.songmid}.m4a?fromtag=38&guid=5931742855${vkey?'&vkey='+vkey:''}`
   })
 }
 
@@ -56,7 +58,7 @@ function filterSinger(singer) {
   return ret.join('/')
 }
 
-// 获取歌曲的vkey
+// 获取歌曲的vkey(返回jsonp对象)
 export function getSongVkey(songmid) {
   const url = 'https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg';
   const data = Object.assign({}, {
