@@ -59,7 +59,7 @@ export default new Router({
       children: [
         {
           path:':id',
-          name:'SingerDetail',
+          name:'SingerDetailInSearch',
           component:SingerDetail
         }
       ]

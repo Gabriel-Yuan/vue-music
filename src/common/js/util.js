@@ -14,6 +14,9 @@ export function shuffle(arr) {
 }
 
 export function debounce(func, delay) {
+  /*
+  * 节流  减少请求次数
+  * */
   let timer;
 
   return function (...args) {
