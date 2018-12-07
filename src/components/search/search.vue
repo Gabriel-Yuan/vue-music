@@ -1,10 +1,10 @@
 <template>
   <div class="search">
     <div class="search-box-wrapper">
-      <search-box ref="searchBox" @query="onQueryChang"></search-box>
+      <search-box ref="searchBox" @query="onQueryChange"></search-box>
     </div>
     <div ref="shortcutWrapper" class="shortcut-wrapper" v-show="!query">
-      <scroll ref="shortcut" class="shortcut" :data="shortcut">
+      <scroll :refresh-delay="refreshDelay" ref="shortcut" class="shortcut" :data="shortcut">
         <div>
           <div class="hot-key">
             <h1 class="title">热门搜索</h1>
@@ -39,22 +39,21 @@
   import {getHotKey} from "../../api/search";
   import {ERR_OK} from "../../api/config";
   import Suggest from "../suggest/suggest";
-  import {mapActions, mapGetters} from "vuex"
+  import {mapActions} from "vuex"
   import SearchList from "@/base/search-list/search-list";
-  import {playlistMixin} from "@/common/js/mixin";
+  import {playlistMixin,searchMixin} from "@/common/js/mixin";
   import Scroll from "@/base/scroll/scroll";
   import Confirm from "@/base/confirm/confirm";
 
   export default {
+    mixins:[playlistMixin,searchMixin],
     name: "search",
     components: {Confirm, Scroll, SearchList, Suggest, SearchBox},
     data() {
       return {
         hotKey: [],
-        query: ''
       }
     },
-    mixins:[playlistMixin],
     created() {
       this._getHotKey();
     },
@@ -62,24 +61,14 @@
       shortcut(){
         return this.hotKey.concat(this.searchHistory)
       },
-      ...mapGetters([
-        'searchHistory',
-      ])
     },
     methods: {
       handlePlayList(playlist){
         const bottom=playlist.length>0?'60px':'';
         this.$refs.searchResult.style.bottom = bottom;
         this.$refs.suggest.refresh();
-
         this.$refs.shortcutWrapper.style.bottom = bottom;
         this.$refs.shortcut.refresh()
-      },
-      addQuery(query) {
-        this.$refs.searchBox.setQuery(query);
-      },
-      onQueryChang(query) {
-        this.query = query;
       },
       showConfirm() {
         this.$refs.confirm.show()
@@ -91,15 +80,7 @@
           }
         })
       },
-      blurInput() {
-        this.$refs.searchBox.blur();
-      },
-      saveSearch() {
-        this.saveSearchHistory(this.query)
-      },
       ...mapActions([
-        'saveSearchHistory',
-        'deleteSearchHistory',
         'clearSearchHistory'
       ])
     },
