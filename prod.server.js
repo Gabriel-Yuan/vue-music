@@ -6,9 +6,9 @@ var port = process.env.PORT || config.build.port;
 
 var app = express();
 
-var apiRoutes = express.Router();
 
-apiRoutes.get('/api/getDiscList', function (req, res) {
+
+app.get('/api/getDiscList', function (req, res) {
   var url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg';
   axios.get(url, {
     headers: {
@@ -22,7 +22,7 @@ apiRoutes.get('/api/getDiscList', function (req, res) {
     console.log(e);
   })
 });
-apiRoutes.get('/api/getSongList', function (req, res) {
+app.get('/api/getSongList', function (req, res) {
   var url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg';
   axios.get(url, {
     headers: {
@@ -45,7 +45,7 @@ apiRoutes.get('/api/getSongList', function (req, res) {
     console.log(e)
   })
 });
-apiRoutes.get('/api/lyric', function (req, res) {
+app.get('/api/lyric', function (req, res) {
   var url = 'https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg';
   axios.get(url, {
     headers: {
@@ -67,7 +67,7 @@ apiRoutes.get('/api/lyric', function (req, res) {
     console.log(e);
   })
 });
-apiRoutes.get('/api/search', function (req, res) {
+app.get('/api/search', function (req, res) {
   var url = 'https://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp';
   axios.get(url, {
     headers: {
@@ -82,7 +82,7 @@ apiRoutes.get('/api/search', function (req, res) {
   })
 });
 
-app.use('/api', apiRoutes);
+
 
 app.use(express.static('./dist'));
 
