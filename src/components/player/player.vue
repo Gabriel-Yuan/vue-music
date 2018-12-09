@@ -16,6 +16,9 @@
           </div>
           <h1 class="title" v-html="currentSong.name"></h1>
           <h2 class="subtitle" v-html="currentSong.singer"></h2>
+          <div class="download">
+            <a :href="this.currentSong.url" :download="this.currentSong.name"><img src="../../common/image/download.png"/></a>
+          </div>
         </div>
         <div class="middle"
              @touchstart.prevent="middleTouchStart"
@@ -107,7 +110,7 @@
 </template>
 
 <script>
-  import {mapGetters, mapMutations,mapActions} from 'vuex'
+  import {mapGetters, mapMutations, mapActions} from 'vuex'
   import animations from 'create-keyframe-animation'
   import {prefixStyle} from "../../common/js/dom";
   import ProgressBar from "../../base/progress-bar/progress-bar";
@@ -125,7 +128,7 @@
   export default {
     name: "player",
     components: {Playlist, Scroll, ProgressCircle, ProgressBar},
-    mixins:[playerMixin],
+    mixins: [playerMixin],
     data() {
       return {
         songReady: false,
@@ -210,10 +213,10 @@
         if (!this.songReady) {
           return;
         }
-        if(this.playlist.length===1){
+        if (this.playlist.length === 1) {
           this.loop();
           return;
-        }else{
+        } else {
           let index = this.currentIndex + 1;
           if (index === this.playlist.length) {
             index = 0;
@@ -229,10 +232,10 @@
         if (!this.songReady) {
           return;
         }
-        if(this.playlist.length===1){
+        if (this.playlist.length === 1) {
           this.loop();
           return;
-        }else{
+        } else {
           let index = this.currentIndex - 1;
           if (index === -1) {
             index = this.playlist.length - 1;
@@ -285,17 +288,17 @@
       },
       getLyric() {
         this.currentSong.getLyric().then((lyric) => {
-          if(this.currentSong.lyric!==lyric){
+          if (this.currentSong.lyric !== lyric) {
             return;
           }
           this.currentLyric = new Lyric(lyric, this.handleLyric);
           if (this.playing) {
             this.currentLyric.play();
-            this.playingLyric='';
-            this.currentLineNum=0;
+            this.playingLyric = '';
+            this.currentLineNum = 0;
           }
-        }).catch(()=>{
-          this.currentLyric=null;
+        }).catch(() => {
+          this.currentLyric = null;
         })
       },
       handleLyric({lineNum, txt}) {
@@ -306,7 +309,7 @@
         } else {
           this.$refs.lyricList.scrollToElement(0, 0, 1000)
         }
-        this.playingLyric=txt;
+        this.playingLyric = txt;
       },
       middleTouchStart(e) {
         this.touch.initiated = true;
@@ -368,7 +371,7 @@
         this.$refs.middleL.style[transitionDuration] = `${time}ms`;
         this.touch.initiated = false
       },
-      showPlaylist(){
+      showPlaylist() {
         this.$refs.playlist.show();
       },
       _resetCurrentIndex(list) {
@@ -418,7 +421,7 @@
     },
     watch: {
       currentSong(newSong, oldSong) {
-        if(!newSong.id){
+        if (!newSong.id) {
           return;
         }
         if (newSong.id === oldSong.id) {
@@ -428,10 +431,10 @@
           this.currentLyric.stop();
         }
         clearTimeout(this.timer);
-        this.timer=setTimeout(() => {
+        this.timer = setTimeout(() => {
           this.$refs.audio.play();
           this.getLyric();
-        },1000)
+        }, 1000)
       },
       playing(newPlaying) {
         const audio = this.$refs.audio;
@@ -494,6 +497,12 @@
           no-wrap()
           font-size: $font-size-large
           color: $color-text
+
+        .download
+          position absolute
+          top 2px
+          right 10px
+          z-index 50
 
         .subtitle
           line-height: 20px
