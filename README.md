@@ -17,4 +17,4 @@ npm run build
 node prod.server.js
 ```
 
-默认构建访问地址问localhost:9000
+默认构建访问地址问localhost
