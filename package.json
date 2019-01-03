@@ -10,19 +10,20 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
-    "vue": "^2.5.2",
-    "vue-router": "^3.0.1",
-    "fastclick": "^1.0.6",
-    "jsonp": "0.2.1",
-    "better-scroll": "^0.1.15",
     "axios": "^0.18.0",
-    "vue-lazyload": "^1.0.6",
-    "vuex": "^3.0.1",
+    "babel-runtime": "^6.26.0",
+    "better-scroll": "^0.1.15",
     "create-keyframe-animation": "^0.1.0",
+    "fastclick": "^1.0.6",
+    "good-storage": "^1.1.0",
     "js-base64": "^2.4.9",
+    "jsonp": "0.2.1",
     "lyric-parser": "^1.0.1",
-    "good-storage": "^1.1.0"
+    "vue": "^2.5.2",
+    "vue-amap": "^0.5.8",
+    "vue-lazyload": "^1.0.6",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -37,7 +38,7 @@
     "babel-preset-stage-2": "^6.22.0",
     "babel-register": "^6.26.0",
     "chalk": "^2.0.1",
-    "compression-webpack-plugin": "^2.0.0",
+    "compression-webpack-plugin": "^1.1.12",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.11",
     "extract-text-webpack-plugin": "^3.0.0",
@@ -66,8 +67,7 @@
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
-    "webpack-merge": "^4.1.0",
-    "compression-webpack-plugin":"^1.1.12"
+    "webpack-merge": "^4.1.0"
   },
   "engines": {
     "node": ">= 6.0.0",

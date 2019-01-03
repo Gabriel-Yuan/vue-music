@@ -13,6 +13,9 @@
     <router-link tag="div" class="tab-item" to="/search">
       <span class="tab-link">搜索</span>
     </router-link>
+    <router-link tag="div" class="tab-item" to="/periphery">
+      <span class="tab-link">周边</span>
+    </router-link>
   </div>
 </template>
 

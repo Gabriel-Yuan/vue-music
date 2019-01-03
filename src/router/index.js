@@ -50,7 +50,11 @@ const UserCenter = (resolve) => {
     resolve(module)
   })
 };
-
+const Periphery = (resolve) => {
+  import('@/components/periphery/periphery').then((module) => {
+    resolve(module)
+  })
+};
 
 export default new Router({
   routes: [
@@ -110,6 +114,11 @@ export default new Router({
       path: '/user',
       name: 'UserCenter',
       component: UserCenter,
+    },
+    {
+      path: '/periphery',
+      name: 'Periphery',
+      component: Periphery,
     }
   ]
 })
